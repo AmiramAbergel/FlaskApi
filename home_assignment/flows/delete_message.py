@@ -1,12 +1,10 @@
-from home_assignment.dal.Message_repository import MessagesRepository
-
-MESSAGES_REPOSITORY = MessagesRepository()
+from home_assignment.dal.Message_repository import MESSAGES_REPOSITORY
 
 
 class DeleteMessageFlow:
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, user_id):
+        self.user_id = user_id
 
-    def delete_message(self):
-        return MESSAGES_REPOSITORY.delete_message()
+    def delete_message(self, user_id):
+        return MESSAGES_REPOSITORY.delete_message(user_id)
 

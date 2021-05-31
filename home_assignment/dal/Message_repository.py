@@ -1,41 +1,29 @@
-import secrets
-from flask import jsonify
-from typing import List
-from home_assignment.app import data_base
+from home_assignment.dal.inmemory_database import InMemoryDatabase
 from home_assignment.model.config_model import Message
-
-
-class InMemoryDatabase:
-    def __init__(self):
-        return
 
 
 class MessagesRepository:
     def __init__(self):
-        self.messages_list = []
-        self.messages_list.extend(data_base)
+        self.db = InMemoryDatabase()
 
-    def add(self, message: Message):
-        self.messages_list.append(message)
+    def write_message(self, message: Message):
+        self.db.add(message)
 
-    # all messages all users - not in the mission
-    def get_all(self) -> List[Message]:
-        return self.messages_list
+    # Extra
+    def get_messages_from_all(self):
+        self.db.get_all()
 
-    def get_specific(self) -> str:
-        message = list(filter(lambda m: m["id"] == id, self.messages_list))
-        message[0]['read'] = True
-        return jsonify({'messages': message[0]})
+    def get_all_user_messages(self, user_id) -> str:
+        return self.db.get_by_id(user_id)
 
-    def get_specific_unread(self):
-        return
+    def get_all_user_unread_messages(self, user_id) -> str:
+        return self.db.get_specific_unread(user_id)
 
-    def read_one(self, message: Message):
-        secrets.choice(self.messages_list)
+    def read_message(self):
+        self.db.read_one()
 
-    def delete_message(self):
-        return
+    def delete_message(self, user_id) -> str:
+        return self.db.delete_message(user_id)
 
 
-
-
+MESSAGES_REPOSITORY = MessagesRepository()

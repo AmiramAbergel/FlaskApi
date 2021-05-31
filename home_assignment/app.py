@@ -1,19 +1,6 @@
 import os
 import logging
 
-from home_assignment.controllers.config import obj
-
-
-def initialize_data(messages_list):
-    result = []
-    for message in messages_list:
-        result.append(message)
-    return result
-
-
-# Connect to DataBase
-data_base = initialize_data(obj)
-
 
 def create_app():
     logger = logging.getLogger("gunicorn.error")
@@ -28,6 +15,10 @@ def create_app():
         Routes
         """
         config_route.router(app2)
+
+        """
+        Initilize DB
+        """
 
         return app2
     except Exception:

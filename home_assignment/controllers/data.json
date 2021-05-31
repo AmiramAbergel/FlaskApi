@@ -4,13 +4,15 @@
     "name" : "Sam",
     "title" : "Developer",
     "message" : "Testing number 1",
-    "active" : true
+    "read" : false,
+    "timestamp": "datetime.now()"
     },
     {
     "id" : 2,
     "name" : "Mia",
     "title" : "HR",
     "message" : "Testing number 2",
-    "active" : false
+    "read" : false,
+    "timestamp": "datetime.now()"
     }
 ]

@@ -1,11 +1,9 @@
-from home_assignment.dal.Message_repository import MessagesRepository
-
-MESSAGES_REPOSITORY = MessagesRepository()
+from home_assignment.dal.Message_repository import MESSAGES_REPOSITORY
 
 
 class ReadOneMessageFlow:
-    def __init__(self, id):
-        self.id = id
+    def __init__(self, user_id):
+        self.user_id = user_id
 
-    def get_specific_unread(self):
-        return MESSAGES_REPOSITORY.read_one()
+    def get_one(self):
+        return MESSAGES_REPOSITORY.read_message()

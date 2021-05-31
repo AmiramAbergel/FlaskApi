@@ -1,11 +1,14 @@
-from home_assignment.dal.Message_repository import MessagesRepository
-
-MESSAGES_REPOSITORY = MessagesRepository()
+from home_assignment.dal.Message_repository import MESSAGES_REPOSITORY, Message
 
 
 class ReadMessageFlow:
-    def __init__(self, id):
-        self.id = id
+    def __init__(self, user_id):
+        self.user_id = user_id
 
-    def get_specific(self):
-        return MESSAGES_REPOSITORY.get_specific()
+    def read_specific(self, user_id: int, name: str, title: str, message: str, read: bool) -> str:
+        message = Message(user_id, name, title, message, read)
+        MESSAGES_REPOSITORY.write_message(message)
+        return message
+
+    def get_specific(self, user_id):
+        return MESSAGES_REPOSITORY.get_all_user_messages(user_id)
