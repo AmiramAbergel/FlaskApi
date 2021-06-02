@@ -1,7 +1,5 @@
 # Import the framework
 from flask import Flask, request
-
-from home_assignment.dal.Message_repository import MESSAGES_REPOSITORY
 from home_assignment.flows.delete_message import DeleteMessageFlow
 from home_assignment.flows.get_all_unread_user_messages import UnreadMessageFlow
 from home_assignment.flows.get_all_user_messages import ReadMessageFlow
@@ -26,7 +24,6 @@ def router(app2):
     @app2.route('/messages/write', methods=['POST'])
     def send_message():
         request_data = request.json
-        # Get the id of the last user message and create the new one
         user_id = request_data['id']
         name = request_data['name']
         title = request_data['title']
