@@ -1,5 +1,6 @@
-import os
 import logging
+
+from home_assignment.controllers import hello_route
 
 
 def create_app():
@@ -7,20 +8,21 @@ def create_app():
     try:
         logger.info("starting create_app")
         from flask import Flask, request, json
-        from home_assignment.route import config_route
+        from home_assignment.controllers import messages_routes
         # Create app
-        app2 = Flask(__name__)
+        app = Flask(__name__)
 
         """
         Routes
         """
-        config_route.router(app2)
+        messages_routes.router(app)
+        hello_route.router2(app)
 
         """
         Initilize DB
         """
 
-        return app2
+        return app
     except Exception:
         logger.exception(f"Error starting flask App")
         raise
