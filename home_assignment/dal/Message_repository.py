@@ -1,5 +1,5 @@
-from home_assignment.dal.inmemory_database import InMemoryDatabase, In_Memory_Database
-from home_assignment.model.config_model import Message
+from dal.inmemory_database import InMemoryDatabase, In_Memory_Database
+from model.config_model import Message
 
 
 class MessagesRepository:

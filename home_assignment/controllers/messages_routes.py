@@ -1,10 +1,10 @@
 # Import the framework
-from flask import Flask, request
-from home_assignment.flows.delete_message import DeleteMessageFlow
-from home_assignment.flows.get_all_unread_user_messages import UnreadMessageFlow
-from home_assignment.flows.get_all_user_messages import ReadMessageFlow
-from home_assignment.flows.read_one_message import ReadOneMessageFlow
-from home_assignment.flows.send_message import SendMessageFlow
+from flask import Flask, request, json
+from flows.delete_message import DeleteMessageFlow
+from flows.get_all_unread_user_messages import UnreadMessageFlow
+from flows.get_all_user_messages import ReadMessageFlow
+from flows.read_one_message import ReadOneMessageFlow
+from flows.send_message import SendMessageFlow
 
 
 def router(app):
@@ -20,13 +20,14 @@ def router(app):
 
     @app.route('/messages/write', methods=['POST'])
     def send_message() -> str:
-        request_data = request.json
-        user_id: str = request_data['id']
-        name: str = request_data['name']
-        title = request_data['title']
-        message = request_data['message']
+        request_data = request.get_data()
+        data = json.loads(request_data)
+        user_id = data.get('user_id')
+        name = data.get('name')
+        title = data.get('title')
+        message = title = data.get('message')
         read = False
-        created_at = request_data['created_at']
+        created_at = data.get('created_at')
 
         flow = SendMessageFlow("Test1")
         result = flow.send(user_id, name, title, message, read, created_at)

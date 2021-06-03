@@ -1,4 +1,4 @@
-from home_assignment.dal.Message_repository import Message, MessagesRepository
+from dal.Message_repository import Message, MessagesRepository
 from datetime import datetime
 
 

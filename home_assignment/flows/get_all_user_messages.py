@@ -1,4 +1,4 @@
-from home_assignment.dal.Message_repository import MessagesRepository, Message
+from dal.Message_repository import MessagesRepository, Message
 
 
 class ReadMessageFlow:

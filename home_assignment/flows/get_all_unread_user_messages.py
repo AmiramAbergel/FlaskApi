@@ -1,4 +1,4 @@
-from home_assignment.dal.Message_repository import MessagesRepository
+from dal.Message_repository import MessagesRepository
 
 
 class UnreadMessageFlow:

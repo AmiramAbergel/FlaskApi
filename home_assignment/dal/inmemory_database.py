@@ -1,7 +1,7 @@
 import secrets
 import pprint
 from typing import List
-from home_assignment.model.config_model import Message
+from model.config_model import Message
 
 
 class InMemoryDatabase:
