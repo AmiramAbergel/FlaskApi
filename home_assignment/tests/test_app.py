@@ -24,14 +24,22 @@ def test_index_page(test_client):
 
 def test_post_route__success(test_client):
     mock_request_data = {
-        "id": 100,
+        "user_id": 100,
         "name": "Tester",
         "title": "VP-test",
-        "message": "Testing user id == 100 message",
+        "message": "Testing user id 100 message",
         "read": True,
-        "created_at": ""
+        "created_at": " "
     }
     url = '/messages/write'
 
     response = test_client.post(url, data=json.dumps(mock_request_data))
     assert response.status_code == 200
+
+
+def test_post_route__failure__bad_request(test_client):
+    mock_request_data = {}
+    url = '/messages/write'
+
+    response = test_client.post(url, data=json.dumps(mock_request_data))
+    assert response.status_code == 400

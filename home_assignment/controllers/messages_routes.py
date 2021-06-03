@@ -25,19 +25,22 @@ def router(app):
         user_id = data.get('user_id')
         name = data.get('name')
         title = data.get('title')
-        message = title = data.get('message')
+        message = data.get('message')
         read = False
         created_at = data.get('created_at')
 
         flow = SendMessageFlow("Test1")
         result = flow.send(user_id, name, title, message, read, created_at)
-        return {"New message": f"id: {result.user_id}, "
-                               f"name: {result.name}, "
-                               f"title: {result.title}, "
-                               f"message: {result.message}, "
-                               f"read: {result.read}, "
-                               f"created_at: {result.created_at} "
-                }
+        if user_id and name and title and message:
+            return {"New message": f"id: {result.user_id}, "
+                                   f"name: {result.name}, "
+                                   f"title: {result.title}, "
+                                   f"message: {result.message}, "
+                                   f"read: {result.read}, "
+                                   f"created_at: {result.created_at} "
+                    }, 200
+        else:
+            return 'Bad Request', 400
 
     @app.route('/messages/<int:user_id>', methods=['GET'])
     def get_message(user_id: int) -> str:
@@ -71,7 +74,3 @@ def router(app):
         result = flow.delete_message(user_id)
 
         return {"Your post has been": f" {result}"}
-
-
-
-
