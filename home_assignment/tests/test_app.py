@@ -3,7 +3,7 @@ import pytest
 from flask import Flask, json
 
 from controllers.hello_route import router2
-from controllers.messages_routes import router
+from controllers.messages_routes import messages_router
 
 '''
 def test_index_page():

@@ -1,8 +1,11 @@
-
 import logging
+from controllers.index_route import index_route
+from controllers.messages_routes import messages_router
+from flask_sqlalchemy import SQLAlchemy
 
-from controllers.hello_route import router2
-from controllers.messages_routes import router
+db = SQLAlchemy()  # done here so that db is importable
+
+MESSAGES_LIST_FILE_PATH = 'local_json_data/data.json'
 
 
 def create_app():
@@ -13,12 +16,14 @@ def create_app():
         from controllers import messages_routes
         # Create app
         app = Flask(__name__)
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+        db.init_app(app)
 
         """
         Routes
         """
-        router(app)
-        router2(app)
+        messages_router(app)
+        index_route(app)
 
         """
         Initilize DB

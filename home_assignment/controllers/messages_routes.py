@@ -7,7 +7,7 @@ from flows.read_one_message import ReadOneMessageFlow
 from flows.send_message import SendMessageFlow
 
 
-def router(app):
+def messages_router(app):
 
     @app.route('/messages/write', methods=['POST'])
     def send_message() -> str:
@@ -16,7 +16,7 @@ def router(app):
         user_id = data.get('user_id')
         name = data.get('name')
         title = data.get('title')
-        message = title = data.get('message')
+        message = data.get('message')
         read = False
         created_at = data.get('created_at')
 
