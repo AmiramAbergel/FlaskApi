@@ -1,8 +1,7 @@
 import secrets
-
-from dal.inmemory_database import In_Memory_Database
+from database import db
 from model.config_model import Message
-from app import db
+
 
 class MessagesRepository:
     def __init__(self):
@@ -10,21 +9,22 @@ class MessagesRepository:
 
     def write_message(self, message: Message):
         self.db.session.add(message)
+        self.db.session.commit()
 
     # Extra
     def get_messages_from_all(self):
-        return self.messages_list
+        messages = Message.query.all()
+        return messages
 
     def get_all_user_messages(self, user_id: int) -> str:
-        user_messages_list = self.messages_list
-        message = list(filter(lambda m: m.user_id == user_id, user_messages_list))
-        message[0].read = True
-        user_id: str = message[0].user_id
-        name: str = message[0].name
-        title = message[0].title
-        user_message = message[0].message
-        read = message[0].read
-        created_at = message[0].created_at
+        message = Message.query.filter_by(user_id=user_id).first_or_404()
+        message.read = True
+        user_id = message.user_id
+        name: str = message.name
+        title = message.title
+        user_message = message.message
+        read = message.read
+        created_at = message.created_at
         return {f"id: {user_id}, "
                 f"name: {name}, "
                 f"title: {title}, "
@@ -34,16 +34,13 @@ class MessagesRepository:
                 }
 
     def get_all_user_unread_messages(self, user_id: int) -> str:
-        user_messages_list = self.messages_list
-        message = list(filter(lambda m: m.user_id == user_id and m.read == False, user_messages_list))
-        return message[0]
+        message = Message.query.filter_by(user_id=user_id).filter_by(read=False)
+        return message
 
     def read_message(self):
         secrets.choice(self.messages_list)
 
     def delete_message(self, user_id: int) -> str:
-        user_messages_list = self.messages_list
-        message = list(filter(lambda m: m.user_id == user_id, user_messages_list))
-        self.messages_list.remove(message[0])
-        print(self.messages_list)
+        message = Message.query.filter_by(user_id=user_id).first_or_404()
+        self.db.session.delete(message)
         return "Deleted!", 200

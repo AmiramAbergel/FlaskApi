@@ -1,4 +1,5 @@
-from dal.Message_repository import Message, MessagesRepository
+from dal.Message_repository import MessagesRepository
+from model.config_model import Message
 
 
 class SendMessageFlow:

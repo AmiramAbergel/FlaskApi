@@ -1,9 +1,7 @@
 import logging
 from controllers.index_route import index_route
 from controllers.messages_routes import messages_router
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()  # done here so that db is importable
+from database import db
 
 MESSAGES_LIST_FILE_PATH = 'local_json_data/data.json'
 
@@ -33,3 +31,8 @@ def create_app():
     except Exception:
         logger.exception(f"Error starting flask App")
         raise
+
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run()
