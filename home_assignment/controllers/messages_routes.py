@@ -5,6 +5,7 @@ from flows.get_all_unread_user_messages import UnreadMessageFlow
 from flows.get_all_user_messages import ReadMessageFlow
 from flows.read_one_message import ReadOneMessageFlow
 from flows.send_message import SendMessageFlow
+from model.config_model import Message
 
 
 def messages_router(app):
@@ -13,15 +14,15 @@ def messages_router(app):
     def send_message() -> str:
         request_data = request.get_data()
         data = json.loads(request_data)
-        user_id = data.get('user_id')
         name = data.get('name')
         title = data.get('title')
         message = data.get('message')
         read = False
         created_at = data.get('created_at')
 
-        flow = SendMessageFlow("Test1")
-        result = flow.send(user_id, name, title, message, read, created_at)
+        res_message = Message(name, title, message, read, created_at)
+        flow = SendMessageFlow(res_message)
+        result = flow.send()
         return {"New message": f"id: {result.user_id}, "
                                f"name: {result.name}, "
                                f"title: {result.title}, "

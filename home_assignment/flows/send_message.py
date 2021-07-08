@@ -3,12 +3,12 @@ from model.config_model import Message
 
 
 class SendMessageFlow:
-    def __init__(self, name: str):
-        self.name = name
+    def __init__(self, message: Message):
+        self.message_repository = MessagesRepository()
+        self.new_message = message
 
-    def send(self, user_id: int, name: str, title: str, message: str, read: bool, created_at: str) -> str:
-        message = Message(user_id, name, title, message, read, created_at)
-        MessagesRepository().write_message(message)
+    def send(self) -> str:
+        message = self.message_repository.write_message(self.new_message)
         return message
 
     # all messages all users - not in the mission
