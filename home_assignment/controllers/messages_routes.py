@@ -5,7 +5,7 @@ from flows.get_all_unread_user_messages import UnreadMessageFlow
 from flows.get_all_user_messages import ReadMessageFlow
 from flows.read_one_message import ReadOneMessageFlow
 from flows.send_message import SendMessageFlow
-from model.config_model import Message
+from model.config_model import User, Message
 
 
 def messages_router(app):

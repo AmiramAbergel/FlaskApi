@@ -23,7 +23,7 @@ class MessagesRepository:
         user_id = message.user_id
         name = message.name
         title = message.title
-        user_message = message.message
+        user_message = message.message_content
         read = message.read
         created_at = message.created_at
         return {f"id: {user_id}, "

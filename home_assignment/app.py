@@ -10,10 +10,12 @@ def create_app():
     logger = logging.getLogger("gunicorn.error")
     try:
         logger.info("starting create_app")
-        from flask import Flask, request, json
+        from flask import Flask, request, json, url_for
         from controllers import messages_routes
         # Create app
         app = Flask(__name__)
+        # Key
+        app.config['SECRET_KEY'] = 'd6086cbfefa52abf3fb7730b725fcc47'
         # Database
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
