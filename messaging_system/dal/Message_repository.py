@@ -1,6 +1,6 @@
 import secrets
-from database import db
-from model.config_model import Message
+from messaging_system import db
+from messaging_system.model.config_model import Message
 
 
 class MessagesRepository:

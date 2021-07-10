@@ -1,11 +1,11 @@
 # Import the framework
-from flask import Flask, request, json
-from flows.delete_message import DeleteMessageFlow
-from flows.get_all_unread_user_messages import UnreadMessageFlow
-from flows.get_all_user_messages import ReadMessageFlow
-from flows.read_one_message import ReadOneMessageFlow
-from flows.send_message import SendMessageFlow
-from model.config_model import User, Message
+from flask import request, json
+from messaging_system.flows.delete_message import DeleteMessageFlow
+from messaging_system.flows.get_all_unread_user_messages import UnreadMessageFlow
+from messaging_system.flows.get_all_user_messages import ReadMessageFlow
+from messaging_system.flows.read_one_message import ReadOneMessageFlow
+from messaging_system.flows.send_message import SendMessageFlow
+from messaging_system.model.config_model import Message
 
 
 def messages_router(app):

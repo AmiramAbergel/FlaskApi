@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for
-from forms import RegistrationForm, LoginForm
+from  messaging_system.views.forms import RegistrationForm, LoginForm
 
 
 def index_route(app):

@@ -1,7 +1,7 @@
 import logging
-from controllers.index_route import index_route
-from controllers.messages_routes import messages_router
-from database import db
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()  # done here so that db is importable
 
 MESSAGES_LIST_FILE_PATH = 'local_json_data/data.json'
 
@@ -11,11 +11,13 @@ def create_app():
     try:
         logger.info("starting create_app")
         from flask import Flask, request, json, url_for
-        from controllers import messages_routes
-        # Create app
+        from messaging_system.settings import Setting
+        from messaging_system.views.index_route import index_route
+        from messaging_system.views.messages_routes import messages_router
+        # Create messaging_system
         app = Flask(__name__)
         # Key
-        app.config['SECRET_KEY'] = 'd6086cbfefa52abf3fb7730b725fcc47'
+        app.config.from_object(Setting)
         # Database
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -35,8 +37,3 @@ def create_app():
     except Exception:
         logger.exception(f"Error starting flask App")
         raise
-
-
-if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True)

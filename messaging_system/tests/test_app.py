@@ -1,15 +1,10 @@
-
-import pytest
-from flask import Flask, json
-
-from controllers.hello_route import router2
-from controllers.messages_routes import messages_router
+from flask import json
 
 '''
 def test_index_page():
-    app = Flask(__name__)
-    router2(app)
-    client = app.test_client()
+    messaging_system = Flask(__name__)
+    router2(messaging_system)
+    client = messaging_system.test_client()
     url = '/'
     response = client.get(url)
     assert response.status_code == 200

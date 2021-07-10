@@ -1,4 +1,4 @@
-from dal.Message_repository import MessagesRepository
+from messaging_system.dal.Message_repository import MessagesRepository
 
 
 class ReadOneMessageFlow:

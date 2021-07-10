@@ -1,5 +1,6 @@
 from datetime import datetime
-from database import db
+from flask import current_app
+from messaging_system import db
 
 
 class User(db.Model):

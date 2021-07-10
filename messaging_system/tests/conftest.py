@@ -1,5 +1,5 @@
 import pytest
-from app import create_app
+from messaging_system import create_app
 
 @pytest.fixture(scope='module')
 def test_client():

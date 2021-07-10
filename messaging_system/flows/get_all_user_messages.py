@@ -1,5 +1,5 @@
-from dal.Message_repository import MessagesRepository
-from model.config_model import Message
+from messaging_system.dal.Message_repository import MessagesRepository
+from messaging_system.model.config_model import Message
 
 class ReadMessageFlow:
     def __init__(self, user_id: int):
