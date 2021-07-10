@@ -1,5 +1,7 @@
 import logging
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 db = SQLAlchemy()  # done here so that db is importable
 
@@ -10,7 +12,7 @@ def create_app():
     logger = logging.getLogger("gunicorn.error")
     try:
         logger.info("starting create_app")
-        from flask import Flask, request, json, url_for
+        from flask import Flask
         from messaging_system.settings import Setting
         from messaging_system.views.index_route import index_route
         from messaging_system.views.messages_routes import messages_router
@@ -22,6 +24,8 @@ def create_app():
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         db.init_app(app)
+        bcrypt = Bcrypt(app)
+        login_manager = LoginManager(app)
 
         """
         Routes
